@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: "postgresql://postgre:Josu190602@db:5433/postgre"
+    ports:
+      - "3000:3000"
+    # Verifique se o container 'app' está expondo a porta correta
+    # Exemplo: Expondo a porta 3000 do container para a porta 3000 do host
+
+  db:
+    image: postgres:14
+    environment:
+      POSTGRES_USER: postgre
+      POSTGRES_PASSWORD: Josu190602
+      POSTGRES_DB: postgre
+    ports:
+      - "5433:5433"
+    # Verifique se o container 'db' está expondo a porta correta
+    # Exemplo: Expondo a porta 5433 do container para a porta 5433 do host
