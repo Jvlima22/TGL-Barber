@@ -1,20 +1,23 @@
-# Use a imagem oficial do Node.js como imagem base
+# Usa uma imagem base com Node.js
 FROM node:18
 
-# Defina o diretório de trabalho no container
+# Define o diretório de trabalho no contêiner
 WORKDIR /app
 
-# Copie o package.json e o package-lock.json para o diretório de trabalho
+# Copia os arquivos de configuração para o contêiner
 COPY package*.json ./
 
-# Instale as dependências
+# Instala as dependências
 RUN npm install
 
-# Copie o restante do código da aplicação para o container
+# Copia o restante do código para o contêiner
 COPY . .
 
-# Exponha a porta na qual a aplicação vai rodar
+# Constrói o projeto Next.js
+RUN npm run build
+
+# Expõe a porta que o Next.js usará
 EXPOSE 3000
 
-# Defina o comando para rodar a aplicação
+# Comando para iniciar o servidor de produção
 CMD ["npm", "start"]
